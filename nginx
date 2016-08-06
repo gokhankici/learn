@@ -1,0 +1,57 @@
+server {
+	...
+	
+	location = / {
+		return 301 https://learn.ramigokhankici.space/eng;
+	}
+
+	location ~ ^/(eng|audio|hir|kanji) {
+		location ~ ^/[a-z]+$ {
+			rewrite "/.*" /index.xhtml break;
+		}
+
+		location ~ ^/[a-z]+/list$ {
+			rewrite "/.*" /list.xhtml break;
+		}
+
+		location ~ ^/[a-z]+/(rand|check|all)$ {
+			rewrite "/([a-z]+)/([a-z]+)" /logic.php?mode=$1&cmd=$2;
+		}
+
+		location ~ ^/[a-z]+/[a-z]+/[0-9]+$ {
+			rewrite "/([a-z]+)/([a-z]+)/([0-9]+)" /logic.php?mode=$1&act=$2&id=$3;
+		}
+
+		location ~ / {
+			return 404;
+		}	
+
+	}
+
+	location ~ ^/mp3/[a-z_].mp3$ {
+		return 501;
+	}
+
+	location ~ \.(js|css)$ {
+		try_files $uri =404;
+	}
+
+	location / {
+		# try_files $uri $uri/ =404;
+		return 404;
+	}
+
+	location ~ [^/].php(/|$) {
+		fastcgi_split_path_info ^(.+?.php)(/.*)$;
+
+		if (!-f $document_root$fastcgi_script_name) {
+			return 404;
+		}
+
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+	}
+
+	...
+}
