@@ -1,5 +1,18 @@
-<!DOCTYPE html>
-<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<!DOCTYPE HTML>
+
+<?php
+require_once '../include/db-connect.php';
+require_once '../include/functions.php';
+ 
+sec_session_start();
+ 
+if (! login_check($mysqli)) {
+	header('Location: /login.php'); 
+	exit;
+}
+?>
+
+<html> 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />

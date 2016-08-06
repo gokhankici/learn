@@ -1,10 +1,24 @@
 <?php
 // vim: set filetype=php expandtab tabstop=2 shiftwidth=2 autoindent smartindent:
 
-$mode = $_GET["mode"];
-$cmd  = $_GET["cmd"];
-$act  = $_GET["act"];
-$id   = $_GET["id"];
+require_once '../include/db-connect.php';
+require_once '../include/functions.php';
+ 
+sec_session_start();
+ 
+if (! login_check($mysqli)) {
+	header('Location: /login.php'); 
+	exit;
+}
+
+if (isset($_GET['mode']))
+  $mode = $_GET['mode'];
+if (isset($_GET['cmd']))
+  $cmd = $_GET['cmd'];
+if (isset($_GET['act']))
+  $act = $_GET['act'];
+if (isset($_GET['id']))
+  $id = $_GET['id'];
 
 $db_entry_size = 7;
 
