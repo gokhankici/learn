@@ -23,6 +23,15 @@ if (! login_check($mysqli)) {
 </head>
 <body>
 
+<div id="header">
+  <ul class="header_bar">
+    <li class="header_bar_item">Hello <?php echo $_SESSION["username"]; ?></li>
+    <ul class="header_bar_right">
+      <li class="header_bar_item_r"><a href="/logout.php">Logout</a></li>
+    </ul>
+  </ul>
+</div>
+
 <div id="page" class="prac">
 </div>
 

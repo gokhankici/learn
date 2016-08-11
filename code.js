@@ -17,7 +17,7 @@
     case 4: return "learned"; break;
     case 5: return "mastered"; break;
     }
-    throw "Inavlid score";
+    throw "Invalid score";
   };
 
   /* retrieve the next card */
@@ -92,7 +92,7 @@
         actions.insertBefore(Gui.button("zero", "Zero", req("zero")), show);
         space.appendChild(Gui.div("score " + App.score(json.score), Gui.text(App.score(json.score))));
 
-        if((App.mode != "audio") && (audio != null)) { audio.play(); }
+        if((App.mode == "audio") && (audio != null)) { audio.play(); }
 
         var list = actions.getElementsByTagName("button");
         for(var i = 0; i < list.length; i++) {

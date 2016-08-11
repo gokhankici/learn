@@ -69,7 +69,7 @@ function get_entries($mode) {
 
     $entry = new Vocab(
         $entry_count++,
-        $args[0],
+        (int) $args[0],
         $args[1],
         $args[2],
         $args[3],
